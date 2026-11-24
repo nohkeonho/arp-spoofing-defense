@@ -1,0 +1,8 @@
+# 실습 중 생기는 경고 기록 (IP/MAC 주소 포함)
+# Warning log created during the lab (contains IP/MAC addresses)
+arp_guard.log
+
+# 파이썬 실행 시 생기는 캐시
+# Python cache files
+__pycache__/
+*.pyc
