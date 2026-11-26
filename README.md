@@ -92,6 +92,10 @@ sudo python3 arp_guard.py --unpin
 
 ## 4. 실습 결과
 
+### 4-0. 정상 상태 (공격 전 기준)
+공격을 시작하기 전, `arp_guard.py`가 게이트웨이 MAC `00:50:56:e5:f8:37`을 정상값으로 기억하고 `정상`을 반복 출력합니다. 이 값을 기준으로 이후 변화를 감지합니다.
+![정상 상태](images/00_normal.png)
+
 ### 4-1. 공격 성공 (중간자 공격)
 공격 중 공격자 VM의 tcpdump에 피해자의 웹 트래픽(유튜브 등)이 그대로 잡힙니다. 피해자 통신이 공격자를 경유한다는 증거입니다. 단, HTTPS 트래픽이라 통신 상대·양은 보여도 내용은 암호화되어 보이지 않습니다.
 ![공격/MitM](images/01_attack.png)
@@ -107,6 +111,8 @@ sudo python3 arp_guard.py --unpin
 ## 5. 고찰 — 호스트 단독 방어의 한계
 
 `--pin`(정적 ARP) 방어를 켠 상태에서도 공격자의 tcpdump에는 피해자의 수신 트래픽이 계속 보입니다. 이는 방어 실패가 아니라 ARP 방어의 구조적 특성입니다.
+
+![방어의 한계](images/04_limitation.png)
 
 | 경로 | 참조하는 ARP 표 | `--pin` 적용 시 | 결과 |
 |---|---|---|---|
@@ -130,5 +136,5 @@ sudo python3 arp_guard.py --unpin
 ├── arp_guard.py    # 방어: 탐지 + MAC 고정 (피해자 VM)
 ├── README.md       # 이 문서
 ├── .gitignore      # 로그 파일 제외
-└── images/         # 실습 결과 캡처 (01_attack, 02_detected, 03_defended)
+└── images/         # 실습 결과 캡처 (00_normal, 01_attack, 02_detected, 03_defended)
 ```
